@@ -14,14 +14,14 @@ function App() {
   return 1 + 1
 }`)
   const [review, setReview] = useState(``)
-  const [loading, setLoading] = useState(false) // 👈 Loader state
+  const [loading, setLoading] = useState(false) 
 
   useEffect(() => {
     prism.highlightAll()
   }, [])
 
   async function reviewCode() {
-    setLoading(true) // 👈 Start loader
+    setLoading(true)
     try {
       const response = await axios.post('http://localhost:3000/ai/get-review', { code })
       setReview(response.data)
@@ -29,7 +29,7 @@ function App() {
       setReview("⚠️ Error while fetching review.")
       console.error(error)
     } finally {
-      setLoading(false) // 👈 Stop loader
+      setLoading(false) 
     }
   }
 
@@ -54,7 +54,7 @@ function App() {
             />
           </div>
 
-          {/* 👇 Review Button */}
+          {/* Review Button */}
           <div
             onClick={loading ? null : reviewCode}
             className={`review ${loading ? 'disabled' : ''}`}
@@ -65,7 +65,7 @@ function App() {
 
         <div className="right">
           {loading ? (
-            <div className="loader">Loading review...</div> // 👈 Loader in review section
+            <div className="loader">Loading review...</div> 
           ) : (
             <Markdown rehypePlugins={[rehypeHighlight]}>
               {review}
